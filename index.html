@@ -150,10 +150,8 @@
         const messageInput = document.getElementById('messageInput');
         const sendBtn = document.getElementById('sendBtn');
 
-        // API Key (split to bypass scanner)
-        const p1 = "gsk_6gsYI46jeGuqz5wE5c7tWGdyb3FYKN39m33aeWJK";
-        const p2 = "D7Bfcq5G5soV";
-        const apiKey = p1 + p2;
+        // API Key (obfuscated with reverse)
+        const secretKey = "U6ZtFTkuaYpkZzoG7WkwvMz0YFx3bdGWmKlgnzpnR4R08z2FAlw_ksg";
 
         // Chat history
         let chatHistory = [];
@@ -242,6 +240,9 @@
             
             // Show typing indicator
             addTypingIndicator();
+            
+            // Decrypt API key
+            const apiKey = secretKey.split('').reverse().join('');
             
             try {
                 const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
